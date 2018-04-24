@@ -10,10 +10,13 @@ def translate(word):
         word = str(word)
 
     if word in data:
-        if word[0] == word[0].upper():
-            return data[word]
-        else:
-            return data[word.lower()]
+        return data[word]
+    elif word.title() in data: 
+        return data[word.title()] # for proper nouns
+    elif word.lower() in data:
+        return data[word.lower()]
+    elif word.upper() in data: 
+        return data[word.upper()] # for acronyms
     elif len(get_close_matches(word, data.keys())) > 0:
         ans = raw_input("Did you mean {} instead? Y/N: ".format(get_close_matches(word, data.keys())[0]))
         if ans in ['yes', 'y']:
